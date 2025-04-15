@@ -1,0 +1,38 @@
+/* #news { 
+    padding: 40px; 
+    background-color: #f5f5f5; 
+}
+
+#news h2 { 
+    color: #333;
+
+}
+
+.news-item {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #007bff;
+    margin-bottom: 20px;
+}
+
+.news-item h3 { 
+    margin: 0 0 10px; 
+}
+
+.news-item a { 
+    color: #007bff; text-decoration: none; 
+} */
+
+#about-us-section {
+    text-align: center;
+    margin: 30px;
+}
+
+#about-us-section > h1 {
+    font-weight: 500;
+}
+
+#about-us-section > p {
+   font-size: 1.2rem;
+}

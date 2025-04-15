@@ -2,11 +2,11 @@ body {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    font-family: "Atkinson Hyperlegible Next", serif;
+    font-family: "Montserrat", sans-serif;
 }
 
 :root {
-    --text-font: "Atkinson Hyperlegible Next", serif;
+    --text-font: "Montserrat", sans-serif
 }
 
 .logo {
