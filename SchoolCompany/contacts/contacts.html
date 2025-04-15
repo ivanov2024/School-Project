@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакти - Здравен портал</title>
+    <link rel="stylesheet" href="../main-code/mainCSS.css">
+    <link rel="stylesheet" href="contacts.css">
+    <script src="../main-code/loadFonts.js"></script>
+    <script src="../main-code/faviconLoader.js"></script>
+</head>
+<body>
+    <div id = "nav-placeholder"></div>
+
+    <script src="../main-code/navLoader.js"></script>
+    <script>
+        loadNavBar();
+    </script>
+
+    <main>
+        <fieldset>
+            <legend>Форма за контакт</legend>
+
+            <p class = "name-container container">      
+                <label for = "text">Въведете вашето име тук<span>*</span>:</label>                     
+                <input type="text" name="text" id="text">
+            </p>            
+
+            <p class = "email-container container">
+                <label for="email">Въведете вашият имейл тук<span>*</span>:</label>
+                <input type="email" class="email" id="email" required>
+            </p>
+
+            <p class = "message-container container">      
+                <label for="message-area">Въведете вашето съобщение тук<span>*</span>:</label>                     
+                <textarea name="message-area" id="message-area"></textarea>
+            </p>
+
+            <p>
+                <input type="button" value="Изпрати">
+            </p>
+
+            <p class = "description">Всички полета обозначени със * са задължителни</p>
+        </fieldset>
+
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11593.905456174634!2d24.611247!3d43.408873!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40ab8b54c05a9b7f%3A0x45187cfb33bdef77!2sPgeht!5e0!3m2!1sen!2sus!4v1740048737887!5m2!1sen!2sus" 
+            width="600" 
+            height="450" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </main>
+
+    <div id = "footer-placeholder"></div>
+
+    <script src="../main-code/footerLoader.js"></script>
+    <script>
+        loadFooter();
+    </script>
+
+</body>
+</html>
