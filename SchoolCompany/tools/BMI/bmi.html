@@ -33,7 +33,7 @@
                         <option value="lb">lb</option>
                     </select>
                 </div>
-        
+
                 <label for="height">Ръст</label>
                 <div class="input-with-unit">
                     <input type="number" id="height" min="0">
@@ -42,7 +42,7 @@
                         <option value="in">in</option>
                     </select>
                 </div>
-        
+
                 <button onclick="calculateBMI()">Изчисли</button>
             </div>
         
@@ -55,6 +55,31 @@
             <div id="bmi-card" style="display: flex; justify-content: center; margin-top: 20px;"></div>
         </div>
         
+        <div class="info-box">
+            <strong>Какво представлява ИТМ (Индекс на телесната маса)?</strong><br><br>
+            Индексът на телесната маса (ИТМ) е международно признат показател, който се използва за оценка на съотношението между телесното тегло и ръста на човек. Целта му е да даде приблизителна представа за това дали теглото ви е в здравословни граници.
+            <br><br>
+        
+            <strong>Как се изчислява?</strong><br>
+            Формулата за изчисляване на ИТМ е:
+            <br><br>
+            <code>ИТМ = тегло (в кг) / (ръст (в м) × ръст (в м))</code>
+            <br><br>
+            Ако използвате лири и инчове:
+            <br>
+            <code>ИТМ = (тегло (lb) / ръст (in)²) × 703</code>
+            <br><br>
+        
+            <strong>Категории на ИТМ:</strong>
+            <ul>
+                <li>Под 18.5 – Поднормено тегло</li>
+                <li>18.5 – 24.9 – Нормално тегло</li>
+                <li>25 – 29.9 – Наднормено тегло</li>
+                <li>30 и повече – Затлъстяване</li>
+            </ul>
+        
+            <strong>Важно:</strong> ИТМ е ориентировъчен показател. Той не отчита процента мазнини, мускулна маса, възраст, пол и други фактори. За прецизна оценка на вашето здравословно състояние, <a href="../../healthy-advices/prevention/prevention.html" style="color: #00796b; font-weight: 500;">консултирайте се със специалист</a>.
+        </div>
     </main>
 
     <div id = "footer-placeholder"></div>

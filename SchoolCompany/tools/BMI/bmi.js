@@ -1,30 +1,44 @@
 function calculateBMI() {
-    const weight = parseFloat(document.getElementById("weight").value);
-    const height = parseFloat(document.getElementById("height").value);
-    const weightUnit = document.getElementById("weight-unit").value;
-    const heightUnit = document.getElementById("height-unit").value;
+    const weight = parseFloat(document.getElementById('weight').value);
+    const height = parseFloat(document.getElementById('height').value);
+    const weightUnit = document.getElementById('weight-unit').value;
+    const heightUnit = document.getElementById('height-unit').value;
+
+    const result = document.getElementById("bmi-result");
 
     if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
-        document.getElementById("bmi-result").innerText = "Моля, въведете валидни стойности.";
+        result.textContent = "Моля, въведете валидни стойности.";
+        result.style.color = "#d32f2f";
         return;
     }
 
-    let weightKg = weightUnit === "lb" ? weight * 0.453592 : weight;
-    let heightM = heightUnit === "in" ? height * 0.0254 : height / 100;
+    let bmi;
 
-    const bmi = weightKg / (heightM * heightM);
-    const bmiRounded = bmi.toFixed(1);
-    let category = "";
-    let color = "";
-    let heading = "";
-    let text = "";
+    if (weightUnit === 'kg' && heightUnit === 'cm') {
+        bmi = weight / ((height / 100) ** 2);
+    } else if (weightUnit === 'lb' && heightUnit === 'in') {
+        bmi = (weight / (height ** 2)) * 703;
+    } else if (weightUnit === 'kg' && heightUnit === 'in') {
+        const heightInCm = height * 2.54;
+        bmi = weight / ((heightInCm / 100) ** 2);
+    } else if (weightUnit === 'lb' && heightUnit === 'cm') {
+        const weightInKg = weight * 0.453592;
+        bmi = weightInKg / ((height / 100) ** 2);
+    }
+
+    bmi = bmi.toFixed(1);
+
+    let category = '';
+    let color = '';
+    let heading = '';
+    let text = '';
     let showCard = false;
 
     if (bmi < 18.5) {
         category = "Поднормено тегло";
         color = "#f57c00";
         heading = "Как да качите килограми здравословно?";
-        text = "Ако вашият БМИ е под нормата, фокусирайте се върху хранителни вещества, балансирана диета и умерена физическа активност. За повече информация:";
+        text = "Ако вашият ИТМ е под нормата, фокусирайте се върху хранителни вещества, балансирана диета и умерена физическа активност. За повече информация:";
         showCard = true;
     } else if (bmi >= 18.5 && bmi < 25) {
         category = "Нормално тегло";
@@ -43,8 +57,7 @@ function calculateBMI() {
         showCard = true;
     }
 
-    const result = document.getElementById("bmi-result");
-    result.innerText = `Вашият БМИ е ${bmiRounded} - ${category}`;
+    result.innerText = `Вашият ИТМ е ${bmi} - ${category}`;
     result.style.color = color;
 
     document.getElementById("bmi-heading").innerText = heading;
@@ -57,7 +70,7 @@ function calculateBMI() {
         const card = document.createElement("a");
         card.href = "../../healthy-advices/balanced-eating/balanced-eating.html";
         card.className = "card";
-        card.innerHTML = "<h1>Виж здравни съвети</h1>";
+        card.innerHTML = "<h1>Към Балансирано хранене</h1>";
         cardContainer.appendChild(card);
     } else {
         document.getElementById("bmi-heading").innerText = "";

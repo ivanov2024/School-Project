@@ -1,0 +1,125 @@
+.calorie-calculator {
+    max-width: 480px;
+    margin: 60px auto;
+    padding: 40px 30px;
+    background-color: #fdfefe;
+    border: 1px solid #d6e9f0;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.calorie-calculator h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 25px;
+    color: #004d40;
+}
+
+.calorie-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.calorie-form label {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.calorie-form input,
+.calorie-form select {
+    width: 100%;
+    padding: 15px 15px;
+    font-size: 1.2rem;
+    border: 1px solid #bbb;
+    border-radius: 8px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.calorie-form input[type="number"]::-webkit-inner-spin-button,
+.calorie-form input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.calorie-form input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.calorie-form button {
+    padding: 15px;
+    background-color: #009688;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.calorie-form button:hover {
+    background-color: #00796b;
+}
+
+.calorie-result {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #222;
+}
+
+.info-box {
+    margin-top: 40px;
+    padding: 30px;
+    background-color: #f3fafa;
+    border-left: 10px solid #009688;
+    border-right: 10px solid #009688;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    color: #333;
+    margin-left: 10px;
+    margin-right: 20px;
+}
+
+.info-box ul {
+    margin-top: 10px;
+    margin-left: 20px;
+    padding-left: 0;
+}
+
+.info-box li {
+    margin-bottom: 6px;
+}
+
+
+@media screen and (max-width: 600px) {
+    .calorie-calculator {
+        padding: 25px 20px;
+        margin: 40px 15px;
+    }
+
+    .calorie-form input,
+    .calorie-form select,
+    .calorie-form button {
+        font-size: 1rem;
+        padding: 12px;
+    }
+
+    .calorie-calculator h2 {
+        font-size: 1.5rem;
+    }
+
+    .calorie-info {
+        margin-left: 15px;
+        margin-right: 15px;
+        padding: 20px;
+        font-size: 1rem;
+        border-left-width: 6px;
+        border-right-width: 6px;
+      }
+}

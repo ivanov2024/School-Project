@@ -1,3 +1,64 @@
+@media (max-width: 600px) {
+    .bmi-calculator {
+        margin: 30px 15px;
+        padding: 25px 20px;
+    }
+
+    .bmi-calculator h2 {
+        font-size: 1.5rem;
+    }
+
+    .bmi-form label {
+        font-size: 1rem;
+        margin-bottom: 4px;
+    }
+
+    .bmi-form input,
+    .input-with-unit select {
+        font-size: 1rem;
+        padding: 12px;
+    }
+
+    .bmi-form button {
+        font-size: 1rem;
+        padding: 12px;
+    }
+
+    .bmi-result {
+        font-size: 1.1rem;
+    }
+
+    .input-with-unit {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .input-with-unit input,
+    .input-with-unit select {
+        flex: 1;
+    }
+
+    .card {
+        width: 100%;
+        height: auto;
+    }
+
+    .card h1 {
+        font-size: 1.1rem;
+    }
+
+    .info-box {
+        margin-left: 15px;
+        margin-right: 15px;
+        padding: 20px;
+        font-size: 1rem;
+        border-left-width: 6px;
+        border-right-width: 6px;
+    }
+}
+
 .bmi-calculator {
     max-width: 480px;
     margin: 60px auto;
@@ -10,6 +71,7 @@
 }
 
 .bmi-calculator h2 {
+    font-size: 2rem;
     text-align: center;
     margin-bottom: 25px;
     color: #004d40;
@@ -22,14 +84,15 @@
 }
 
 .bmi-form label {
+    font-size: 1.2rem;
     font-weight: 500;
     color: #333;
     text-align: left;
 }
 
 .bmi-form input {
-    padding: 10px 14px;
-    font-size: 1em;
+    padding: 15px 15px;
+    font-size: 1.2rem;
     border: 1px solid #bbb;
     border-radius: 8px;
     outline: none;
@@ -43,13 +106,14 @@
 }
 
 .bmi-form button {
-    padding: 12px;
+    padding: 15px 15px;
     background-color: #009688;
     color: #fff;
     border: none;
     border-radius: 8px;
     font-weight: bold;
     cursor: pointer;
+    font-size: 1rem;
     transition: background-color 0.3s ease;
 }
 
@@ -60,7 +124,7 @@
 .bmi-result {
     margin-top: 25px;
     text-align: center;
-    font-size: 1.1em;
+    font-size: 1.3rem;
     font-weight: 500;
     color: #222;
 }
@@ -80,8 +144,8 @@
 }
 
 .input-with-unit select {
-    padding: 10px;
-    font-size: 1em;
+    padding: 15px 15px;
+    font-size: 1.2rem;
     border: 1px solid #bbb;
     border-radius: 8px;
     background-color: #fff;
@@ -142,3 +206,25 @@
     margin: 0;
 }
 
+.info-box {
+    margin-top: 40px;
+    padding: 30px;
+    background-color: #f3fafa;
+    border-left: 10px solid #009688;
+    border-right: 10px solid #009688;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    color: #333;
+    margin-left: 10px;
+    margin-right: 20px;
+}
+
+.info-box ul {
+    margin-top: 10px;
+    margin-left: 20px;
+    padding-left: 0;
+}
+
+.info-box li {
+    margin-bottom: 6px;
+}

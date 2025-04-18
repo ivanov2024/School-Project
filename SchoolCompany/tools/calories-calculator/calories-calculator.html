@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="calories-calculator.css">
     <script src="../../nested-main-code/nested-loadFonts.js"></script>
     <script src="../../nested-main-code/nested-faviconLoader.js"></script>
+    <script src="calories-calculator.js"></script>
 </head>
 <body>
     
@@ -20,6 +21,69 @@
 
     <main>
 
+        <div class="calorie-calculator">
+            <h2>Калориен калкулатор</h2>
+            <div class="calorie-form">
+              <label for="gender">Пол</label>
+              <select id="gender">
+                <option value="male">Мъж</option>
+                <option value="female">Жена</option>
+              </select>
+          
+              <label for="calorie-weight">Тегло (kg)</label>
+              <input type="number" id="calorie-weight">
+          
+              <label for="calorie-height">Ръст (cm)</label>
+              <input type="number" id="calorie-height">
+          
+              <label for="calorie-age">Възраст</label>
+              <input type="number" id="calorie-age">
+          
+              <label for="activity">Ниво на активност</label>
+              <select id="activity">
+                <option value="1.2">Без физическа активност</option>
+                <option value="1.375">Лека активност (1-3 дни/седмица)</option>
+                <option value="1.55">Умерена активност (3-5 дни/седмица)</option>
+                <option value="1.725">Висока активност (6-7 дни/седмица)</option>
+                <option value="1.9">Много висока активност (2 пъти дневно и т.н.)</option>
+              </select>
+          
+              <button onclick="calculateCalories()">Изчисли</button>
+            </div>
+          
+            <div class="calorie-result" id="calorie-result"></div>
+          </div>
+        
+          <div class="info-box">
+            <strong>Какво изчислява калорийният калкулатор?</strong><br><br>
+            Калорийният калкулатор изчислява приблизително колко калории са ви необходими на ден, за да поддържате текущото си тегло. Изчислението се базира на вашата възраст, ръст, тегло, пол и ниво на физическа активност.
+            <br><br>
+        
+            <strong>Използвана формула:</strong><br>
+            Калкулаторът използва формулата на <em>Mifflin-St Jeor</em>, една от най-надеждните за изчисляване на базов метаболизъм (BMR):
+            <br><br>
+            <strong>За мъже:</strong><br>
+            <code>BMR = 10 × тегло(кг) + 6.25 × ръст(см) – 5 × възраст + 5</code><br><br>
+            <strong>За жени:</strong><br>
+            <code>BMR = 10 × тегло(кг) + 6.25 × ръст(см) – 5 × възраст – 161</code>
+            <br><br>
+        
+            След това получената стойност се умножава по коефициент според нивото на активност:
+            <ul>
+                <li>1.2 – Малко или никаква активност</li>
+                <li>1.375 – Лека активност (1–3 дни седмично)</li>
+                <li>1.55 – Умерена активност (3–5 дни седмично)</li>
+                <li>1.725 – Интензивна активност (6–7 дни седмично)</li>
+                <li>1.9 – Много интензивна активност (двойни тренировки и физически труд)</li>
+            </ul>
+        
+            <strong>Какво означава резултатът?</strong><br>
+            Получената стойност е приблизителният брой калории, които трябва да приемате ежедневно, за да поддържате текущото си тегло. За отслабване или покачване на маса, е необходимо да намалите или увеличите калорийния си прием с около 10–20%, според целта.
+            <br><br>
+        
+            <strong>Важно:</strong> Това е ориентировъчен калкулатор. За персонализирани съвети се препоръчва консултация с <a href="../../healthy-advices/prevention/prevention.html" style="color: #00796b; font-weight: 500;">медицински специалист</a> или диетолог.
+        </div>        
+          
     </main>
 
     <div id = "footer-placeholder"></div>
@@ -28,5 +92,6 @@
     <script>
         loadFooter();
     </script>
+    
 </body>
 </html>
