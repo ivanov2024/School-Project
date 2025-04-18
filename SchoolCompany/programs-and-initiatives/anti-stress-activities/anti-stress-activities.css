@@ -1,0 +1,47 @@
+main > h1 {
+    text-align: center;
+    font-weight: 500;
+    padding: 50px;
+    font-size: 2em;
+  }
+  
+  .video-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:30px;
+  }
+  
+  .video-item {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .video-wrapper {
+    position: relative;
+    width: 800px;
+    height: 400px;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .video-wrapper iframe {
+    width: 800px;
+    height: 400px;
+    border: none;
+  }
+  
+  .video-caption {
+    margin-top: 12px;
+    position: relative;
+    left: -52%;
+    font-size: 1.7rem;
+    text-align: center;
+    color: #333;
+  }
+  
