@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Здравен портал - BMI калкулатор</title>
+    <link rel="stylesheet" href="../../main-code/mainCSS.css">
+    <link rel="stylesheet" href="bmi.css">
+    <script src="../../nested-main-code/nested-loadFonts.js"></script>
+    <script src="../../nested-main-code/nested-faviconLoader.js"></script>
+    <script src="bmi.js"></script>
+</head>
+<body>
+    
+    <div id = "nav-placeholder"></div>
+
+    <script src="../../nested-main-code/nested-navLoader.js"></script>
+    <script>
+        loadNavBar();
+    </script>
+
+    <main>
+
+        <div class="bmi-calculator">
+            <h2>Калкулатор за ИТМ (BMI)</h2>
+        
+            <div class="bmi-form">
+                <label for="weight">Тегло</label>
+                <div class="input-with-unit">
+                    <input type="number" id="weight" min="0">
+                    <select id="weight-unit">
+                        <option value="kg">kg</option>
+                        <option value="lb">lb</option>
+                    </select>
+                </div>
+        
+                <label for="height">Ръст</label>
+                <div class="input-with-unit">
+                    <input type="number" id="height" min="0">
+                    <select id="height-unit">
+                        <option value="cm">cm</option>
+                        <option value="in">in</option>
+                    </select>
+                </div>
+        
+                <button onclick="calculateBMI()">Изчисли</button>
+            </div>
+        
+            <div class="bmi-result" id="bmi-result"></div>
+        </div>
+
+        <div id="bmi-extra">
+            <h1 id="bmi-heading" style="text-align: center; color: #00796b;"></h3>
+            <p id="bmi-text" style="text-align: center;font-size: 1.2rem ; max-width: 580px; margin: 0 auto; color: #444;"></p>
+            <div id="bmi-card" style="display: flex; justify-content: center; margin-top: 20px;"></div>
+        </div>
+        
+    </main>
+
+    <div id = "footer-placeholder"></div>
+
+    <script src="../../nested-main-code/nested-footerLoader.js"></script>
+    <script>
+        loadFooter();
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+function calculateBMI() {
+    const weight = parseFloat(document.getElementById("weight").value);
+    const height = parseFloat(document.getElementById("height").value);
+    const weightUnit = document.getElementById("weight-unit").value;
+    const heightUnit = document.getElementById("height-unit").value;
+
+    if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+        document.getElementById("bmi-result").innerText = "Моля, въведете валидни стойности.";
+        return;
+    }
+
+    let weightKg = weightUnit === "lb" ? weight * 0.453592 : weight;
+    let heightM = heightUnit === "in" ? height * 0.0254 : height / 100;
+
+    const bmi = weightKg / (heightM * heightM);
+    const bmiRounded = bmi.toFixed(1);
+    let category = "";
+    let color = "";
+    let heading = "";
+    let text = "";
+    let showCard = false;
+
+    if (bmi < 18.5) {
+        category = "Поднормено тегло";
+        color = "#f57c00";
+        heading = "Как да качите килограми здравословно?";
+        text = "Ако вашият БМИ е под нормата, фокусирайте се върху хранителни вещества, балансирана диета и умерена физическа активност. За повече информация:";
+        showCard = true;
+    } else if (bmi >= 18.5 && bmi < 25) {
+        category = "Нормално тегло";
+        color = "#388e3c";
+    } else if (bmi >= 25 && bmi < 30) {
+        category = "Наднормено тегло";
+        color = "#fbc02d";
+        heading = "Как да свалите килограми бързо и лесно?";
+        text = "Намалете приема на захари и мазнини, увеличете физическата активност и се консултирайте със специалист. За повече информация:";
+        showCard = true;
+    } else {
+        category = "Затлъстяване";
+        color = "#d32f2f";
+        heading = "Как да свалите килограми бързо и лесно?";
+        text = "Създайте устойчив план с балансирано хранене и редовно движение. Избягвайте крайни диети. За повече информация:";
+        showCard = true;
+    }
+
+    const result = document.getElementById("bmi-result");
+    result.innerText = `Вашият БМИ е ${bmiRounded} - ${category}`;
+    result.style.color = color;
+
+    document.getElementById("bmi-heading").innerText = heading;
+    document.getElementById("bmi-text").innerText = text;
+
+    const cardContainer = document.getElementById("bmi-card");
+    cardContainer.innerHTML = "";
+
+    if (showCard) {
+        const card = document.createElement("a");
+        card.href = "../../healthy-advices/balanced-eating/balanced-eating.html";
+        card.className = "card";
+        card.innerHTML = "<h1>Виж здравни съвети</h1>";
+        cardContainer.appendChild(card);
+    } else {
+        document.getElementById("bmi-heading").innerText = "";
+        document.getElementById("bmi-text").innerText = "";
+    }
+}
