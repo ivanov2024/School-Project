@@ -58,17 +58,21 @@
                 <button type="submit">Запази напомняне</button>
             </form>
         
-            <div style="display: flex; justify-content: flex-end; position: relative;">
-                <button id="sort-button" title="Сортирай" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">⚙️</button>
-                <div id="sort-menu" style="position: absolute; right: 0; top: 40px; background: #fff; border: 1px solid #ccc; border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.15); padding: 10px; display: none; z-index: 10;">
+            <div class="sort-container">
+                <span class="sort-label">Сортирай по:</span>
+                <span id="sort-icon" class="sort-icon">⚙️</span>
+                <div id="sort-menu" class="sort-menu">
                     <div>
-                        <label><input type="radio" name="sortOrder" value="asc" checked> Възходящ</label>
+                        <label><input type="radio" name="sort-order" value="asc" checked> Възходящо</label><br>
+                        <label><input type="radio" name="sort-order" value="desc"> Низходящо</label>
                     </div>
+                    <hr>
                     <div>
-                        <label><input type="radio" name="sortOrder" value="desc"> Низходящ</label>
+                        <label><input type="radio" name="sort-by" value="date" checked> Дата</label><br>
+                        <label><input type="radio" name="sort-by" value="time"> Час</label>
                     </div>
                 </div>
-            </div>                          
+            </div>                                                   
 
             <ul id="reminder-list"></ul>
         </div>        

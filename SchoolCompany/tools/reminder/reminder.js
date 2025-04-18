@@ -5,13 +5,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const hourSelect = document.getElementById("reminder-hour");
     const minuteSelect = document.getElementById("reminder-minute");
     const reminderList = document.getElementById("reminder-list");
-
-    const sortButton = document.getElementById("sort-button");
+    const sortIcon = document.getElementById("sort-icon");
     const sortMenu = document.getElementById("sort-menu");
 
     let editingIndex = null;
-    let sortCriteria = "datetime";
-    let sortOrder = "asc";
+    let notificationTimeouts = [];
+    let currentSortBy = "date";
+    let currentSortOrder = "asc";
 
     populateTimeOptions();
     loadReminders();
@@ -30,7 +30,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!message || !date) return;
 
-        const reminder = { message, date, hour, minute };
+        const reminder = {
+            message,
+            date,
+            hour,
+            minute
+        };
 
         const reminders = JSON.parse(localStorage.getItem("reminders")) || [];
 
@@ -44,6 +49,30 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("reminders", JSON.stringify(reminders));
         renderReminders();
         form.reset();
+    });
+
+    sortIcon.addEventListener("click", () => {
+        sortMenu.style.display = sortMenu.style.display === "block" ? "none" : "block";
+    });
+
+    document.addEventListener("click", (e) => {
+        if (!sortMenu.contains(e.target) && e.target !== sortIcon) {
+            sortMenu.style.display = "none";
+        }
+    });
+
+    document.querySelectorAll('input[name="sort-by"]').forEach(radio => {
+        radio.addEventListener("change", (e) => {
+            currentSortBy = e.target.value;
+            renderReminders();
+        });
+    });
+
+    document.querySelectorAll('input[name="sort-order"]').forEach(radio => {
+        radio.addEventListener("change", (e) => {
+            currentSortOrder = e.target.value;
+            renderReminders();
+        });
     });
 
     function populateTimeOptions() {
@@ -70,11 +99,22 @@ document.addEventListener("DOMContentLoaded", () => {
         reminderList.innerHTML = "";
         const reminders = JSON.parse(localStorage.getItem("reminders")) || [];
 
+        // Сортиране
         reminders.sort((a, b) => {
-            const dateA = new Date(`${a.date}T${a.hour.toString().padStart(2, '0')}:${a.minute.toString().padStart(2, '0')}`);
-            const dateB = new Date(`${b.date}T${b.hour.toString().padStart(2, '0')}:${b.minute.toString().padStart(2, '0')}`);
-            return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
+            let valA, valB;
+            if (currentSortBy === "date") {
+                valA = new Date(`${a.date}T00:00`);
+                valB = new Date(`${b.date}T00:00`);
+            } else {
+                valA = a.hour * 60 + a.minute;
+                valB = b.hour * 60 + b.minute;
+            }
+            return currentSortOrder === "asc" ? valA - valB : valB - valA;
         });
+
+        // Изчистване на старите timeout-и
+        notificationTimeouts.forEach(clearTimeout);
+        notificationTimeouts = [];
 
         reminders.forEach((reminder, index) => {
             const card = document.createElement("div");
@@ -99,9 +139,9 @@ document.addEventListener("DOMContentLoaded", () => {
             deleteBtn.innerHTML = "🗑️";
             deleteBtn.title = "Изтрий";
             deleteBtn.addEventListener("click", () => {
-                const updatedReminders = JSON.parse(localStorage.getItem("reminders")) || [];
-                updatedReminders.splice(index, 1);
-                localStorage.setItem("reminders", JSON.stringify(updatedReminders));
+                const reminders = JSON.parse(localStorage.getItem("reminders")) || [];
+                reminders.splice(index, 1);
+                localStorage.setItem("reminders", JSON.stringify(reminders));
                 renderReminders();
             });
 
@@ -124,29 +164,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const timeout = reminderTime - now;
 
-        setTimeout(() => {
+        const timeoutId = setTimeout(() => {
             new Notification("Напомняне", {
                 body: reminder.message,
-                icon: "https://cdn-icons-png.flaticon.com/512/1827/1827392.png"
+                icon: "../../../images/logo-example.jpg"
             });
         }, timeout);
+
+        notificationTimeouts.push(timeoutId);
     }
-
-    // Сортиране – меню и логика
-    sortButton.addEventListener("click", () => {
-        sortMenu.classList.toggle("visible");
-    });
-
-    document.querySelectorAll("#sort-menu input").forEach(input => {
-        input.addEventListener("change", () => {
-            if (input.name === "sortOrder") sortOrder = input.value;
-            renderReminders();
-        });
-    });
-
-    document.addEventListener("click", (e) => {
-        if (!sortButton.contains(e.target) && !sortMenu.contains(e.target)) {
-            sortMenu.classList.remove("visible");
-        }
-    });
 });
