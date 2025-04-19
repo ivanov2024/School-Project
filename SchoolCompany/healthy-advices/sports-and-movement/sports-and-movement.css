@@ -1,0 +1,110 @@
+.physical-activity-section {
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 40px 30px;
+    background-color: #fefefe;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    font-family: 'Segoe UI', sans-serif;
+    text-align: center;
+}
+
+.physical-activity-section h2 {
+    font-size: 2.4rem;
+    color: #004d40;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.intro-text {
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 14px;
+}
+
+.activity-quote {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 35px;
+    font-size: 1.15rem;
+}
+
+.activity-card {
+    background-color: #f9f9f9;
+    border: 1px solid #c4e7e6;
+    border-radius: 16px;
+    padding: 26px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+    font-size: 1.2rem;
+    text-align: left;
+    transition: box-shadow 0.3s ease;
+    margin-bottom: 30px;
+}
+
+.activity-card:hover {
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+}
+
+.activity-card h3 {
+    font-size: 1.6rem;
+    margin-bottom: 14px;
+    color: #00695c;
+    font-weight: 600;
+}
+
+.activity-card p {
+    font-size: 1.25rem;
+    color: #444;
+    line-height: 1.6;
+}
+
+.full-text {
+    display: none;
+    opacity: 0;
+    margin-top: 10px;
+    transition: opacity 0.4s ease;
+    font-size: 1.25rem;
+    color: #444;
+    line-height: 1.6;
+}
+
+.activity-card.open .full-text {
+    display: block;
+    opacity: 1;
+}
+
+.read-more-btn {
+    margin-top: 12px;
+    background: none;
+    border: none;
+    color: #2a7a2e;
+    font-weight: normal;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 1.25rem;
+    padding: 0;
+}
+
+.read-more-btn:hover,
+.read-more-btn:active {
+    font-weight: 550;
+    color: #1e591e;
+    text-decoration: underline;
+}
+
+.dots {
+    display: inline;
+    cursor: pointer;
+}
+
+.fun-fact {
+    background-color: #e8f5e9;
+    border-left: 4px solid #4caf50;
+    padding: 16px 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    font-size: 1.25rem;
+    color: #2e7d32;
+    line-height: 1.6;
+}
