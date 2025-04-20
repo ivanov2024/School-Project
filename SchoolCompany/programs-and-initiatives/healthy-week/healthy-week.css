@@ -1,0 +1,474 @@
+/* ============================
+   === Базови стилове ===
+============================ */
+body {
+    background: #f4f6f8;
+    margin: 0;
+    padding: 0;
+}
+
+/* ============================
+   === Основна карта: Седмица на здравето ===
+============================ */
+.week-card {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #f7f9fb;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.week-card h2 {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+.week-card blockquote {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.week-card p {
+    font-size: 1.1em;
+    color: #333;
+}
+
+/* ============================
+   === Интро и таймер ===
+============================ */
+.health-week-intro {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto 30px;
+    padding: 20px;
+}
+/* ============================
+   === Бутони под картата ===
+============================ */
+.card-buttons,
+#toggleGallery {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.card-buttons button,
+#toggleGallery {
+    padding: 10px 15px;
+    background: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.card-buttons button:hover,
+#toggleGallery:hover {
+    background: #218838;
+}
+
+/* ============================
+   === Дни от здравната седмица ===
+============================ */
+.health-week-days {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding: 0 20px;
+}
+
+.health-day-card {
+    width: 90%;
+    max-width: 700px;
+    background: #fefefe;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.health-day-card h3 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* ============================
+   === Галерия със снимки ===
+============================ */
+.image-gallery {
+    margin: 30px 0;
+}
+
+.image-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    max-height: 280px;
+}
+
+.image-row.expanded {
+    max-height: 9999px;
+}
+
+.image-row img,
+.image-gallery .image-row img {
+    width: calc(33% - 14px);
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    align-self: center;
+}
+
+.image-wrapper {
+    text-align: center;
+}
+
+.image-wrapper img {
+    max-width: 150px;
+    border-radius: 8px;
+}
+
+/* ============================
+   === Картови изображения в галерията ===
+============================ */
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: space-between;
+    margin-top: 32px;
+}
+
+.image-card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    width: calc(33.33% - 20px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.image-card img {
+    width: 100%;
+    height: 200px;
+    padding: 10px;
+    object-fit: contain;
+    display: block;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.caption {
+    padding: 12px 14px 24px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #2c2c2c;
+    text-align: left;
+    font-weight: 500;
+    flex-grow: 1;
+    margin-bottom: 30px;
+}
+
+.date {
+    position: absolute;
+    bottom: 12px;
+    left: 16px;
+    font-size: 13px;
+    color: #555;
+    font-weight: 500;
+    font-style: normal;
+}
+
+/* ============================
+   === Форми: Качване и Мнение ===
+============================ */
+.upload-section,
+.feedback-section {
+    margin-top: 40px;
+}
+
+form,
+#uploadForm {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap:10px;
+}
+
+form input[type="file"],
+form input[type="text"],
+form textarea,
+#caption,
+.popup-content input,
+.popup-content textarea {
+    width: 100%;
+    padding: 10px 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+form button,
+#uploadForm button[type="submit"],
+#feedbackPopup button[type="submit"],
+.popup-content button[type="submit"] {
+    background-color: #28a745;
+    color: white;
+    padding: 12px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 8px;
+}
+
+form button:hover,
+#uploadForm button[type="submit"]:hover,
+#feedbackPopup button[type="submit"]:hover,
+.popup-content button[type="submit"]:hover {
+    background-color: #218838;
+}
+
+#uploadForm textarea {
+    resize: vertical;
+    min-height: 100px;
+    margin-top: 8px;
+}
+
+#uploadForm input[type="file"] {
+    margin-top: 8px;
+    margin-bottom: 16px;
+}
+
+/* ============================
+   === Бутон за мнение ===
+============================ */
+.feedback-btn {
+    background-color: #0077cc;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s;
+}
+
+.feedback-btn:hover {
+    background-color: #005fa3;
+}
+
+/* ============================
+   === Качване на файл: Стилизирано поле ===
+============================ */
+.custom-file-input {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    overflow: hidden;
+    text-align: center;
+    font-size: 16px;
+    color: #666;
+    transition: border-color 0.3s ease;
+    margin-bottom: 15px;
+}
+
+.custom-file-input:hover {
+    border-color: #28a745;
+}
+
+.custom-file-input img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.custom-file-input .file-icon {
+    font-size: 40px;
+    color: #bbb;
+}
+
+#image {
+    display: none;
+    position: absolute;
+    left: -9999px;
+}
+
+/* ============================
+   === Popup прозорци и анимации ===
+============================ */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    max-width: 400px;
+    width: 90%;
+    font-size: 16px;
+    opacity: 0;
+    pointer-events: none;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+}
+
+.popup.fade-in {
+    animation-name: popupFadeIn;
+}
+
+.popup.fade-out {
+    animation-name: popupFadeOut;
+}
+
+.popup.active,
+.popup.show,
+.popup.fade-in {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
+}
+
+.popup:not(.active),
+.popup.fade-out {
+    opacity: 0;
+    transform: scale(0.95);
+    pointer-events: none;
+    display: none;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    animation: popupShow 0.4s ease-out;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.popup-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.popup-content label,
+#feedbackPopup label,
+#uploadForm label {
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.popup-message {
+    margin-top: 8px;
+    color: #28a745;
+    font-weight: 500;
+    text-align: center;
+    font-size: 14px;
+}
+
+.close-popup {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    font-size: 40px;
+    color: #888;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.close-popup:hover {
+    color: #e74c3c;
+}
+
+@keyframes popupFadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes popupFadeOut {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+}
+
+#toggleGallery,
+#openUploadPopup,
+#openFeedbackPopup {
+    display: block;
+    margin: 25px auto 0 auto;
+    padding: 12px;
+    font-size: 1.1rem;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    width: fit-content;
+    min-width: 200px;
+    text-align: center;
+}
+
+#toggleGallery:hover,
+#openUploadPopup:hover,
+#openFeedbackPopup:hover {
+    background-color: #218838;
+}
+
+#feedbackForm textarea {
+    width: 100%;         /* или конкретна стойност като 400px */
+    height: 120px;       /* фиксирана височина */
+    resize: none;        /* забранява разтягането */
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+#feedbackForm textarea:focus,
+#caption:focus {
+    border-color: #218838;
+    outline: none;
+}
