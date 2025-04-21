@@ -49,48 +49,70 @@ function renderCalendar(date) {
     const day = document.createElement("div");
     day.className = "calendar-day";
     day.textContent = i;
-
+  
     const dayId = `${monthKey}-day-${i}`;
     day.setAttribute("data-date", dayId);
-
-    // Показване на емоджи
+  
+    // Изчистване на остатъци
+    day.innerHTML = i;
+  
+    // 🎯 Емоджи
     if (emojiData[dayId]) {
       const { emoji, color } = emojiData[dayId];
       day.style.backgroundColor = color;
-
+  
       const emojiSpan = document.createElement("span");
       emojiSpan.className = "emoji-indicator";
       emojiSpan.innerText = emoji;
       day.appendChild(emojiSpan);
     }
-
-    // 📝 Показване на бележка и иконка, ако има
+  
+    // 📝 Бележка
     if (notes[dayId]) {
       day.classList.add("has-note");
-
+  
       const noteIcon = document.createElement("span");
       noteIcon.className = "note-indicator";
       noteIcon.textContent = "📝";
       day.appendChild(noteIcon);
-
+  
       const noteText = document.createElement("div");
       noteText.className = "note-preview";
       noteText.textContent = notes[dayId];
       day.appendChild(noteText);
-    } else {
-      day.classList.remove("has-note");
     }
-
-    day.classList.add("inactive-day");
-
+  
+    // 👉 Клик за отваряне на текстовия модал
     day.addEventListener("click", () => {
+        console.log("Кликнат ден:", dayId);
       selectedDayElement = day;
       noteTextarea.value = notes[dayId] || "";
-      textModal.style.display = "block";
+      openTextModal();
     });
-
+  
     calendar.appendChild(day);
   }
+  
+}
+
+// 👉 Отваряне на текстовия модал
+function openTextModal() {
+  textModal.style.display = "block";
+}
+
+// 👉 Затваряне на текстовия модал
+function closeTextModal() {
+  textModal.style.display = "none";
+}
+
+// 👉 Отваряне на emoji модала
+function openEmojiModal() {
+  emojiModal.style.display = "block";
+}
+
+// 👉 Затваряне на emoji модала
+function closeEmojiModal() {
+  emojiModal.style.display = "none";
 }
 
 // Избор на дата от input
@@ -127,46 +149,36 @@ datePicker.addEventListener("change", () => {
 
 // Запазване на бележка и преминаване към emoji
 saveNoteBtn.addEventListener("click", () => {
-    if (!selectedDayElement) return;
-  
-    const dayId = selectedDayElement.getAttribute("data-date");
-    const note = noteTextarea.value.trim();
-    const notes = safeParse("dayNotes");
-  
-    // 🧼 Винаги премахваме предишните елементи
-    const oldNoteIcon = selectedDayElement.querySelector(".note-indicator");
-    if (oldNoteIcon) oldNoteIcon.remove();
-  
-    const oldNotePreview = selectedDayElement.querySelector(".note-preview");
-    if (oldNotePreview) oldNotePreview.remove();
-  
-    // 📝 Обновяване или премахване на бележката
-    if (note) {
-      notes[dayId] = note;
-      selectedDayElement.classList.add("has-note");
-  
-      const noteIcon = document.createElement("span");
-      noteIcon.className = "note-indicator";
-      noteIcon.textContent = "📝";
-      selectedDayElement.appendChild(noteIcon);
-  
-      const noteText = document.createElement("div");
-      noteText.className = "note-preview";
-      noteText.textContent = note;
-      selectedDayElement.appendChild(noteText);
-    } else {
-      delete notes[dayId];
-      selectedDayElement.classList.remove("has-note");
-    }
-  
-    // 💾 Запис в localStorage
-    localStorage.setItem("dayNotes", JSON.stringify(notes));
-  
-    // 📦 Преминаване към emoji модал
-    textModal.style.display = "none";
-    emojiModal.style.display = "block";
-  });
-  
+  if (!selectedDayElement) return;
+
+  const dayId = selectedDayElement.getAttribute("data-date");
+  const note = noteTextarea.value.trim();
+  const notes = safeParse("dayNotes");
+
+  // Обновяване или премахване на бележката
+  if (note) {
+    notes[dayId] = note;
+    selectedDayElement.classList.add("has-note");
+
+    const noteIcon = document.createElement("span");
+    noteIcon.className = "note-indicator";
+    noteIcon.textContent = "📝";
+    selectedDayElement.appendChild(noteIcon);
+
+    const noteText = document.createElement("div");
+    noteText.className = "note-preview";
+    noteText.textContent = note;
+    selectedDayElement.appendChild(noteText);
+  } else {
+    delete notes[dayId];
+    selectedDayElement.classList.remove("has-note");
+  }
+
+  localStorage.setItem("dayNotes", JSON.stringify(notes));
+
+  closeTextModal();
+  openEmojiModal();
+});
 
 // Emoji логика
 emojiButtons.forEach(button => {
@@ -177,8 +189,8 @@ emojiButtons.forEach(button => {
     const bgColor = button.getAttribute("data-color");
     const dayId = selectedDayElement.getAttribute("data-date");
 
-    // Премахване на стар emoji
     selectedDayElement.style.backgroundColor = bgColor || "";
+
     let existingEmoji = selectedDayElement.querySelector(".emoji-indicator");
     if (existingEmoji) existingEmoji.remove();
 
@@ -189,7 +201,6 @@ emojiButtons.forEach(button => {
       selectedDayElement.appendChild(emojiSpan);
     }
 
-    // Запис в localStorage
     const emojiData = safeParse("emojiCalendar");
     if (emoji) {
       emojiData[dayId] = { emoji, color: bgColor };
@@ -198,17 +209,17 @@ emojiButtons.forEach(button => {
     }
     localStorage.setItem("emojiCalendar", JSON.stringify(emojiData));
 
-    emojiModal.style.display = "none";
+    closeEmojiModal();
   });
 });
 
 // Затваряне на модалите
-emojiClose.onclick = () => emojiModal.style.display = "none";
-textClose.onclick = () => textModal.style.display = "none";
+emojiClose.onclick = closeEmojiModal;
+textClose.onclick = closeTextModal;
 
 window.onclick = e => {
-  if (e.target === emojiModal) emojiModal.style.display = "none";
-  if (e.target === textModal) textModal.style.display = "none";
+  if (e.target === emojiModal) closeEmojiModal();
+  if (e.target === textModal) closeTextModal();
 };
 
 // Зареждане при отваряне
