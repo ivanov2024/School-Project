@@ -18,30 +18,104 @@
     </script>
 
     <main>
-        <h1>Как да преодолеем стреса?</h1>
 
-        <div class="video-grid">
-
-            <div class="video-item">
-                <p class="video-caption">Намали стреса си за 3 минути:</p>
-                <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/grfXR6FAsI8" allowfullscreen></iframe>
-              </div>
+        <section class="relax-section">
+            <h2>Антистрес занимания 🧘‍♀️</h2>
+            <p class="intro">Стресът е част от живота – но и доброто настроение. Открий своето антистрес занимание.</p>
+    
+            <div class="quote-box">„Понякога най-продуктивното нещо е просто да си починеш.“</div>
+    
+            <div id="relax-timer">
+                <div class="circle" id="breathe-circle">Вдишай</div>
+            </div>
+    
+            <div class="pdf-section">
+                <h3>📄 Йога упражнения за сваляне</h3>
+                <a href="https://www.yogajournal.com/wp-content/uploads/2021/08/YJ_BeginnersGuide2021.pdf" target="_blank" download>Изтегли PDF – Йога за начинаещи</a>
+            </div>
+        </section>
+          
+        <section class="quiz-section">
+            <h3>🧘‍♂️ Кой антистрес герой си ти?</h3>
+            
+            <div id="quiz-start">
+                <button id="start-quiz">Започни теста</button>
             </div>
         
-            <div class="video-item">
-              <p class="video-caption">Кратко описание на видеото 2</p>
-              <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" allowfullscreen></iframe>
+            <div id="quiz-container" style="display: none;">
+                <div id="quiz-question"></div>
+                <div id="quiz-options"></div>
+                <div id="quiz-error" style="display: none; color: #d84315;">Моля, избери отговор.</div>
+                <button id="prev-question">Назад</button>
+                <button id="next-question">Напред</button>
+            </div>
+        
+            <div id="quiz-result" style="display: none;">
+                <div id="quiz-score"></div>
+                <div id="quiz-message"></div>
+                <button id="restartQuiz">Рестартирай теста</button>
+            </div>
+        </section>
+                      
+        <section class="music-relax-section quiz-section">
+            <h3>🎧 Релаксираща музика за душата</h3>
+            <div class="music-card">
+              <p>Музиката има силата да въздейства на мозъчната активност, да понижи стреса и да повиши настроението. Избери плейлист и се отпусни.</p>
+              <div class="music-links">
+                <a href="https://www.youtube.com/watch?v=2OEL4P1Rz04" target="_blank" class="music-btn">🌿 Природни звуци</a>
+                <a href="https://www.youtube.com/watch?v=5qap5aO4i9A" target="_blank" class="music-btn">☕ Lo-fi chill</a>
+                <a href="https://open.spotify.com/playlist/37i9dQZF1DX3PIPIT6lEg5" target="_blank" class="music-btn">🧘‍♀️ Йога & медитация</a>
               </div>
             </div>
+        </section>          
+
+        <section class="mental-calendar-section quiz-section">
+            <div id="date-selector" class="custom-date-wrapper">
+                <label for="date-picker" class="visually-hidden">Избери дата</label>
+                <input type="date" id="date-picker">
+                <button id="calendar-button" aria-label="Избери дата">📅</button>
+              </div>                     
+            <div id="calendar"></div>
+            <p class="calendar-note">Избери ден и добави дейност, която повдига настроението ти! 🎈</p>
+        </section>
+             
     </main>
 
+    <div id="emojiModal" class="emoji-modal">
+        <div class="emoji-modal-content">
+          <span class="emoji-close">&times;</span>
+          <h3>Избери настроение:</h3>
+          <div class="emoji-options">
+            <button data-emoji="😊" data-color="#d4edda">😊 Щастлив</button>
+            <button data-emoji="😔" data-color="#ffeeba">😔 Тъжен</button>
+            <button data-emoji="😡" data-color="#f8d7da">😡 Ядосан</button>
+            <button data-emoji="😴" data-color="#e2e3e5">😴 Уморен</button>
+            <button data-emoji="🤩" data-color="#d1ecf1">🤩 Вдъхновен</button>
+            <button data-emoji="" data-color="">🚫 Изчисти</button>
+          </div>
+        </div>
+    </div>
+
+    <!-- Модал за въвеждане на бележка -->
+    <div id="textModal" class="modal">
+        <div class="modal-content">
+        <span class="text-close">&times;</span>
+        <div class="modal-header">
+            <span class="modal-icon">📝</span>
+            <h2>Бележка за деня</h2>
+        </div>
+        <textarea id="day-note" placeholder="Напиши кратко съобщение..."></textarea>
+        <button id="save-note" class="save-button">Запази</button>
+        </div>
+    </div>
+   
     <div id = "footer-placeholder"></div>
 
     <script src="../../nested-main-code/nested-footerLoader.js"></script>
     <script>
         loadFooter();
     </script>
+
+    <script src="anti-stress-activites.js"></script>
 </body>
 </html>

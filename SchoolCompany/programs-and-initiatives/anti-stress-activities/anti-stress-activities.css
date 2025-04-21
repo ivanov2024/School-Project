@@ -1,47 +1,537 @@
-main > h1 {
-    text-align: center;
-    font-weight: 500;
-    padding: 50px;
-    font-size: 2em;
-  }
-  
-  .video-grid {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap:30px;
-  }
-  
-  .video-item {
-    width: 100%;
-    max-width: 400px;
-    margin-bottom: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .video-wrapper {
-    position: relative;
-    width: 800px;
-    height: 400px;
-    overflow: hidden;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .video-wrapper iframe {
-    width: 800px;
-    height: 400px;
-    border: none;
-  }
-  
-  .video-caption {
-    margin-top: 12px;
-    position: relative;
-    left: -52%;
-    font-size: 1.7rem;
-    text-align: center;
-    color: #333;
-  }
-  
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #e0f7fa, #f1f8e9);
+  color: #2e3d49;
+  margin: 0;
+  padding: 0;
+}
+
+.relax-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+h2 {
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+.intro {
+  text-align: center;
+  font-size: 1.2em;
+  margin-bottom: 30px;
+}
+
+.quote-box {
+  font-style: italic;
+  background-color: #ffffffbb;
+  border-left: 5px solid #80cbc4;
+  padding: 15px 20px;
+  margin: 20px auto 40px;
+  max-width: 600px;
+  border-radius: 8px;
+}
+
+#relax-timer {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: #a5d6a7;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4em;
+  animation: breathing 6s ease-in-out infinite;
+}
+
+@keyframes breathing {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+#quiz-container {
+  margin-bottom: 40px;
+  background-color: #ffffffdd;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.question {
+  margin-bottom: 15px;
+}
+
+.question p {
+  font-weight: bold;
+}
+
+.question label {
+  display: block;
+  margin: 5px 0;
+}
+
+#quiz-result {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+#random-activity {
+  display: block;
+  margin: 0 auto 10px;
+  padding: 10px 20px;
+  font-size: 1em;
+  background-color: #ce93d8;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#random-activity:hover {
+  background-color: #ba68c8;
+}
+
+#activity-result {
+  text-align: center;
+  margin-bottom: 40px;
+  font-style: italic;
+}
+
+.pdf-section {
+  background-color: #ffffffcc;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.pdf-section a {
+  color: #00695c;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.pdf-section a:hover {
+  text-decoration: underline;
+}
+
+/* === Секция: Антистрес Викторина === */
+.quiz-section {
+  max-width: 800px;
+  margin: 40px auto;
+  background: #f0f4ff;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.quiz-section h3 {
+  margin-bottom: 16px;
+  color: #2a73d6;
+  font-size: 1.6em;
+  text-align: center;
+}
+
+.quiz-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 1.2rem;
+}
+
+.quiz-card h2 {
+  text-align: center;
+  color: #174ea6;
+  margin-bottom: 20px;
+  font-size: 1.5em;
+}
+
+.quiz-option {
+  display: block;
+  background-color: #e8f0fe;
+  padding: 12px 16px;
+  margin: 12px 0;
+  border-radius: 10px;
+  border: 1px solid #c3dafe;
+  color: #174ea6;
+  cursor: pointer;
+}
+
+.quiz-option input {
+  margin-right: 10px;
+  accent-color: #2a73d6;
+}
+
+.quiz-error {
+  color: #d93025;
+  font-weight: bold;
+  margin-top: 16px;
+  text-align: center;
+  font-size: 15px;
+}
+
+.quiz-controls {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#start-quiz,
+#next-question,
+#prev-question,
+#restartQuiz {
+  background-color: #2a73d6;
+  color: white;
+  padding: 12px 20px;
+  margin: 15px 8px 0;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.quiz-btn:hover {
+  background-color: #174ea6;
+  transform: scale(1.03);
+}
+
+.quiz-btn:active {
+  transform: scale(0.97);
+}
+
+.restart-btn {
+  background-color: #1a56b0;
+}
+
+.restart-btn:hover {
+  background-color: #133b85;
+}
+
+.quiz-result {
+  text-align: center;
+  margin-top: 30px;
+  padding: 25px;
+  font-size: 1.4em;
+  color: #174ea6;
+  background-color: #e6f0ff;
+  border: 2px solid #bed7ff;
+  border-radius: 14px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.important-info {
+  color: #2a73d6;
+  font-weight: bold;
+}
+
+#quiz-result {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+#quiz-start {
+  text-align: center;
+}
+
+#quiz-question h2 {
+  font-size: 1.25rem;
+}
+
+.music-relax-section h3 {
+  color: #4e342e;
+}
+
+.music-card {
+  background-color: #fff9f0;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.1rem;
+  color: #5d4037;
+}
+
+.music-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.music-btn {
+  background-color: #8d6e63;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+}
+
+.music-btn:hover {
+  background-color: #6d4c41;
+  transform: scale(1.05);
+}
+
+.mental-calendar-section h3 {
+  color: #2e7d32;
+}
+
+#calendar {
+  max-width: 700px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+  font-size: 1rem;
+}
+
+.calendar-day {
+  background-color: #e8f5e9;
+  border: 1px solid #c8e6c9;
+  padding: 14px 8px;
+  text-align: center;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  position: relative;
+  min-height: 90px;
+  width: 100px;
+  height: 100px;
+  box-sizing: border-box;
+}
+
+.calendar-day:hover {
+  background-color: #c8e6c9;
+}
+
+.day-activity {
+  font-size: 0.85rem;
+  margin-top: 8px;
+  color: #388e3c;
+}
+
+.day-emoji {
+  font-size: 1.4rem;
+  margin-top: 6px;
+}
+
+.mental-calendar-section {
+  text-align: center;
+}
+
+.mood-happy {
+  background-color: #d0f0c0;
+}
+
+.mood-sad {
+  background-color: #e3f2fd;
+}
+
+.mood-angry {
+  background-color: #ffebee;
+}
+
+.mood-neutral {
+  background-color: #f1f8e9;
+}
+
+.emoji-indicator {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  font-size: 1.2em;
+}
+
+.emoji-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.emoji-modal-content {
+  background: white;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 12px;
+  width: 320px;
+  text-align: center;
+}
+
+.emoji-options button {
+  margin: 5px;
+  font-size: 1.5em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.emoji-options button:hover {
+  transform: scale(1.2);
+}
+
+.emoji-close {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.emoji-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.emoji-close {
+  font-size: 28px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.emoji-close:hover {
+  color: red;
+}
+
+.emoji-modal-content {
+  text-align: center;
+}
+
+#date-selector {
+  margin-bottom: 15px;
+}
+
+.emoji-options button {
+  font-size: 24px;
+  margin: 5px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s;
+}
+
+.emoji-options button:hover {
+  transform: scale(1.1);
+}
+
+.selected-date-glow {
+  outline: 2px solid #4CAF50;
+  border-radius: 6px;
+  animation: pulse 1s ease-in-out infinite;
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
+}
+
+@keyframes pulse {
+  0% { outline-color: #ff9800; }
+  50% { outline-color: #ffcc80; }
+  100% { outline-color: #ff9800; }
+}
+
+.inactive-day {
+  pointer-events: none;
+  opacity: 0.4;
+  cursor: default;
+}
+
+.custom-date-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+#date-picker {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#calendar-button {
+  font-size: 24px;
+  padding: 6px 10px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
+
+/* note-indicator не е завършен в оригиналния код */
+.note-indicator {
+  position:absolute;
+  bottom:4px;
+  left: 4px;
+  font-size: 1.2em;
+}
+
+.note-preview {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#calendar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 3 по-големи карти на ред за по-добро пространство */
+  gap: 20px;
+  margin: 40px auto;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
+.calendar-day{
+  min-width: 160px; /* Увеличена минимална широчина */
+  min-height: 180px;
+  max-height: 200px;
+  padding: 10px;
+  margin: 4px;
+  background-color: #f0f8ff;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.calendar-day:hover {
+  background-color: #e0f7fa;
+  transform: scale(1.05);
+}
+
+
