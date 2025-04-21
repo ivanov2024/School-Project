@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     const SERVER_BASE_URL = 'http://localhost:3000';
 
     // Popup елементи
@@ -20,17 +20,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             showPopup(uploadPopup);
         });
-    });    
+    });
 
     document.querySelectorAll('.openFeedbackPopup').forEach(btn => {
         btn.addEventListener('click', () => showPopup(feedbackPopup));
     });
 
     function showPopup(popup) {
+        // Затваряме всички други попъпи
         document.querySelectorAll('.popup').forEach(p => {
-            if (p !== popup && p.classList.contains('active')) hidePopup(p);
+            if (p !== popup && p.classList.contains('active')) {
+                hidePopup(p);
+            }
         });
-
         popup.style.display = 'block';
         popup.classList.remove('fade-out');
         popup.classList.add('fade-in', 'active');
@@ -52,50 +54,66 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Галерии
-    document.querySelectorAll('.week-card').forEach(card => {
-        const gallery = card.querySelector('.gallery');
-        const toggleBtn = card.querySelector('.toggle-gallery');
+    // Логика за галериите във всеки "week-card"
+    function initializeGalleries() {
+        document.querySelectorAll('.week-card').forEach(card => {
+            const gallery = card.querySelector('.gallery');
+            const toggleBtn = card.querySelector('.toggleGalleryBtn');
+            if (!gallery || !toggleBtn) return;
 
-        if (!gallery || !toggleBtn) return;
+            const cardsPerRow = 3;
+            let currentVisible = cardsPerRow;
+            let isExpanded = false;
 
-        let visibleRows = 1;
-        const cardsPerRow = 3;
+            const updateGalleryView = () => {
+                const imageCards = gallery.querySelectorAll('.image-card');
+                imageCards.forEach((card, index) => {
+                    if (index < currentVisible) {
+                        card.classList.add('visible');
+                        card.classList.remove('hidden');
+                        card.style.display = 'block'; // показваме картата преди анимацията
+                        setTimeout(() => {
+                            card.classList.add('visible'); // активиране на анимацията
+                        }, 10);
+                    } else {
+                        card.classList.remove('visible');
+                        setTimeout(() => {
+                            card.classList.add('hidden'); // скриване след анимацията
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            
+                toggleBtn.innerHTML = (isExpanded || currentVisible >= imageCards.length)
+                    ? 'Покажи по-малко &#8593;'
+                    : 'Покажи повече &#8595;';
+            };            
+            
+            // Първоначално състояние
+            updateGalleryView();
 
-        toggleBtn.addEventListener('click', () => {
-            const imageCards = gallery.querySelectorAll('.image-card');
-            const totalCards = imageCards.length;
-            const maxRows = Math.ceil(totalCards / cardsPerRow);
-
-            visibleRows = (visibleRows >= maxRows) ? 1 : visibleRows + 1;
-            const visibleCount = visibleRows * cardsPerRow;
-
-            imageCards.forEach((card, index) => {
-                if (index < visibleCount) {
-                    card.style.maxHeight = '500px';
-                    card.style.marginBottom = '15px';
-                    card.style.padding = '10px';
+            toggleBtn.onclick = () => {
+                const total = gallery.querySelectorAll('.image-card').length;
+                if (isExpanded) {
+                    currentVisible = cardsPerRow;
+                    isExpanded = false;
                 } else {
-                    card.style.maxHeight = '0';
-                    card.style.marginBottom = '0';
-                    card.style.padding = '0';
+                    currentVisible += cardsPerRow;
+                    if (currentVisible >= total) {
+                        currentVisible = total;
+                        isExpanded = true;
+                    }
                 }
-                card.style.transition = 'all 0.4s ease';
-                card.style.overflow = 'hidden';
-            });
-
-            toggleBtn.innerHTML = (visibleCount >= totalCards)
-                ? 'Покажи по-малко &#8593;'
-                : 'Покажи повече &#8595;';
+                updateGalleryView();
+            };
         });
-    });
+    }
 
-    // Зареждане на снимки
+    // Зареждане на снимки от сървъра
     async function loadImages() {
         try {
             const response = await fetch(`${SERVER_BASE_URL}/get-images`);
             const images = await response.json();
-
             images.forEach(img => {
                 const targetGallery = document.querySelector(`.gallery[data-gallery-id="${img.galleryId}"]`);
                 if (targetGallery) {
@@ -104,35 +122,31 @@ document.addEventListener('DOMContentLoaded', () => {
                     targetGallery.appendChild(card);
                 }
             });
-            
         } catch (err) {
             console.error('Грешка при зареждане на снимки:', err);
         }
     }
 
-    loadImages();
+    await loadImages();
+    initializeGalleries();
 
     // Качване на снимка
     if (uploadForm) {
         uploadForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-
             const formData = new FormData(uploadForm);
             const galleryId = uploadForm.dataset.galleryId;
             formData.append('galleryId', galleryId);
-            console.log(galleryId);
-
+            console.log('Качваме снимка за галерия:', galleryId);
             try {
                 const response = await fetch(`${SERVER_BASE_URL}/upload`, {
                     method: 'POST',
                     body: formData
                 });
-
                 const result = await response.json();
-
                 if (result.success) {
                     const imageUrl = `${SERVER_BASE_URL}/uploads/${result.filename}`;
-                    const card = createImageCard(imageUrl, result.caption, result.date, result.galleryId);
+                    const card = createImageCard(imageUrl, result.caption, result.date);
                     const targetGallery = document.querySelector(`.gallery[data-gallery-id="${galleryId}"]`);
                     if (targetGallery) targetGallery.appendChild(card);
 
@@ -149,21 +163,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Обратна връзка
+    // Изпращане на обратна връзка
     if (feedbackForm) {
         feedbackForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const feedback = feedbackForm.querySelector('textarea').value;
-
             try {
                 const response = await fetch(`${SERVER_BASE_URL}/feedback`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ feedback })
                 });
-
                 const result = await response.json();
-
                 if (result.success) {
                     feedbackMsg.textContent = '✅ Благодарим за обратната връзка!';
                     feedbackForm.reset();
@@ -198,37 +209,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 imagePreview.innerHTML = '<span class="file-icon">📁</span>';
             }
         });
-
         imagePreview.addEventListener('click', () => imageInput.click());
     }
 
-    // Генериране на карта със снимка
+    // Функция за създаване на карта със снимка
     function createImageCard(url, caption, date) {
         const card = document.createElement('div');
         card.className = 'image-card';
-
         const img = document.createElement('img');
         img.src = url;
         img.alt = caption || 'Качена снимка';
-
         const pCaption = document.createElement('p');
         pCaption.className = 'caption';
         pCaption.textContent = caption || 'Без описание.';
-
         const pDate = document.createElement('span');
         pDate.className = 'date';
         if (date) {
             const formattedDate = formatDate(date);
             pDate.textContent = `📅 ${formattedDate}`;
         }
-
         card.appendChild(img);
         card.appendChild(pCaption);
         if (date) card.appendChild(pDate);
-
         return card;
     }
 
+    // Форматиране на дата във вид dd.mm.yyyy
     function formatDate(isoDate) {
         const date = new Date(isoDate);
         const day = String(date.getDate()).padStart(2, '0');

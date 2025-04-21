@@ -1,0 +1,280 @@
+/* === Основна секция: Първа помощ === */
+.first-aid-lessons {
+    padding: 40px 20px;
+    background-color: #f8fafd;
+    font-family: 'Segoe UI', sans-serif;
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 40px 30px;
+    background-color: #fefefe;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    font-family: 'Segoe UI', sans-serif;
+    text-align: center;
+  }
+  
+  .first-aid-lessons h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 2em;
+    color: #0a4c74;
+  }
+  
+  .intro-text {
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 14px;
+  }
+
+  .first-aid-lessons blockquote {
+    font-style: italic;
+    text-align: center;
+    margin-top: 10px;
+    color: #4d4d4d;
+  }
+  
+  /* === Карта: Първа помощ === */
+  .first-aid-card {
+    background-color: #f9f9f9;
+    border: 1px solid #c4e7e6;
+    border-radius: 16px;
+    padding: 26px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+    font-size: 1.2rem;
+    text-align: left;
+    max-width: 1000px;
+    margin: 0 auto 30px auto;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .first-aid-card:hover {
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+  }
+  
+  .first-aid-card h3 {
+    font-size: 1.6rem;
+    margin-bottom: 14px;
+    color: #b71c1c;
+    font-weight: 600;
+  }
+  
+  .first-aid-card .short-text p {
+    font-size: 1.25rem;
+    color: #444;
+    line-height: 1.6;
+  }
+  
+  .first-aid-card .full-text {
+    display: none;
+    opacity: 0;
+    margin-top: 10px;
+    font-size: 1.25rem;
+    color: #444;
+    line-height: 1.6;
+    transition: opacity 0.4s ease;
+  }
+  
+  .first-aid-card.open .full-text {
+    display: block;
+    opacity: 1;
+  }
+  
+  .first-aid-card .toggle-btn {
+    background: none;
+    border: none;
+    color: #b71c1c;
+    font-size: 1.25rem;
+    cursor: pointer;
+    margin-top: 12px;
+    padding: 0;
+    transition: all 0.3s ease;
+  }
+  
+  .first-aid-card .toggle-btn:hover {
+    color: #7f0000;
+    text-decoration: underline;
+  }
+  
+  .first-aid-card .fun-fact {
+    background-color: #fdecea;
+    border-left: 4px solid #ef5350;
+    padding: 16px 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    font-size: 1.25rem;
+    color: #c62828;
+    line-height: 1.6;
+  }
+  
+  /* === Карта: Обща (извън първа помощ) === */
+  .card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 700px;
+    transition: box-shadow 0.3s;
+  }
+  
+  .card h3 {
+    font-size: 1.4em;
+    color: #d6336c;
+    margin-bottom: 12px;
+  }
+  
+  .card .short-text p,
+  .card .full-text {
+    font-size: 1em;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .card .fun-fact {
+    background-color: #f9f9f9;
+    border-left: 4px solid #ffc107;
+    padding: 10px 14px;
+    margin-top: 15px;
+    border-radius: 6px;
+    font-size: 0.95em;
+  }
+  
+  /* Бутони */
+  .toggle-btn {
+    background-color: #d6336c;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-top: 12px;
+  }
+  
+  /* === Секция: Викторини === */
+  .quiz-section {
+    max-width: 800px;
+    margin: 40px auto;
+    background: #fff5f5;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  }
+  
+  .quiz-section h3 {
+    margin-bottom: 16px;
+    color: #b00020;
+    font-size: 1.6em;
+    text-align: center;
+  }
+  
+  .quiz-card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1.2rem;
+  }
+  
+  .quiz-card h2 {
+    text-align: center;
+    color: #c62828;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+  }
+  
+  .quiz-option {
+    display: block;
+    background-color: #fdeaea;
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 10px;
+    border: 1px solid #f5c6cb;
+    color: #8b1c1c;
+    cursor: pointer;
+  }
+  
+  .quiz-option input {
+    margin-right: 10px;
+    accent-color: #d32f2f;
+  }
+  
+  .quiz-error {
+    color: #b00020;
+    font-weight: bold;
+    margin-top: 16px;
+    text-align: center;
+    font-size: 15px;
+  }
+  
+  .quiz-controls {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  #start-quiz,
+  #next-question,
+  #prev-question,
+  #restartQuiz {
+    background-color: #d32f2f;
+    color: white;
+    padding: 12px 20px;
+    margin: 15px 8px 0;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .quiz-btn:hover {
+    background-color: #b71c1c;
+    transform: scale(1.03);
+  }
+  
+  .quiz-btn:active {
+    transform: scale(0.97);
+  }
+  
+  .restart-btn {
+    background-color: #c62828;
+  }
+  
+  .restart-btn:hover {
+    background-color: #a4161a;
+  }
+  
+  .quiz-result {
+    text-align: center;
+    margin-top: 30px;
+    padding: 25px;
+    font-size: 1.4em;
+    color: #b00020;
+    background-color: #fde0e0;
+    border: 2px solid #f4b3b3;
+    border-radius: 14px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .important-info {
+    color: #b00020;
+    font-weight: bold;
+  }
+  
+  #quiz-result {
+    text-align: center;
+    font-size: 1.2rem;
+  }
+  
+  #quiz-start {
+    text-align: center;
+  }
+  
