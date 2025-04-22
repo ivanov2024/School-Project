@@ -1,3 +1,4 @@
+/* Основни стилове за навигационното меню */
 body {
     box-sizing: border-box;
     padding: 0;
@@ -6,79 +7,120 @@ body {
 }
 
 :root {
-    --text-font: "Segoe UI", sans-serif
+    --text-font: "Segoe UI", sans-serif;
+    --nav-padding: 20px;
+    --link-padding: 10px 15px;
+    --transition-speed: 0.3s;
 }
 
 .logo {
-    width: 130px;
-    height: 126px;
+    width: 150px;
+    height: 100px;
+    object-fit: contain;
 }
 
 .main-nav {
     width: 100%;
     background-color: #fff;
     border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+    position: relative;
 }
 
 .main-list {
     display: flex;
     flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     list-style: none;
-    padding: 20px;
+    padding: var(--nav-padding);
     margin: 0;
+    gap: 5px;
+}
+
+.main-list > li {
+    position: relative;
 }
 
 .main-list > li > a {
     font-family: var(--text-font);
     color: inherit;
     text-decoration: none;
-    font-size: 1.2em;
-    padding: 10px 15px;
+    font-size: clamp(1rem, 1.5vw, 1.2em);
+    padding: var(--link-padding);
     display: block;
+    transition: all var(--transition-speed) ease;
+    white-space: nowrap;
 }
 
 #image-link {
     display: inline-block;
-    width: 100px;
+    width: 150px;
     height: 100px;
+    padding: 0;
 }
 
 .main-nav a:hover {
     text-decoration: underline;
 }
 
+/* Стилове за dropdown менюта */
 .dropdown {
     position: relative;
 }
 
 .nested-list {
     position: absolute;
-    top: 100%;
+    top: calc(100% + 5px); /* Малко отстояние от родителя */
     left: 0;
-    background: white;
-    display: none;
+    background: #fff;
     opacity: 0;
     visibility: hidden;
     list-style: none;
-    padding: 10px;
+    padding: 8px 0;
     margin: 0;
-    border: 1px solid rgba(0, 0, 0, 0.16);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); /* По-мека сянка */
+    transition: all var(--transition-speed) ease;
+    min-width: 220px;
+    z-index: 1000;
+    transform: translateY(-10px); /* Начална позиция за анимация */
+    transform-origin: top;
+    will-change: transform, opacity; /* Оптимизация за анимации */
+    backdrop-filter: blur(4px); /* Мъгляв ефект за модерни браузъри */
 }
 
 .nested-list li {
-    padding: 8px 15px;
-    text-align: center;
+    padding: 0;
+    margin: 0 8px; /* Отстояние от страните */
+    border-radius: 4px; /* Съответства на радиуса на бутоните */
+    overflow: hidden; /* За да се запазят закръглените ъгли */
+}
+
+.nested-list li:not(:last-child) {
+    margin-bottom: 4px; /* По-добро разделяне между елементите */
 }
 
 .nested-list li a {
     text-decoration: none;
-    color: inherit;
+    color: #333;
     display: block;
+    padding: 10px 16px;
+    font-size: 0.95em;
+    transition: all var(--transition-speed) ease;
+    white-space: nowrap;
+}
+
+.nested-list li a:hover {
+    background-color: #f8f8f8;
+    padding-left: 20px;
+    color: #000; /* Леко затъмняване на текста */
+}
+
+.nested-list li a:focus {
+    outline: none;
+    background-color: #f0f0f0;
+    box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.1);
 }
 
 .dropdown:hover .nested-list, 
@@ -88,11 +130,64 @@ body {
     visibility: visible;
 }
 
-footer {
-    text-align: center;
+.dropdown:hover .nested-list,
+.dropdown:focus-within .nested-list {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0); /* Анимация на движение */
 }
 
-footer > p {
-    font-weight: 400;
-    font-size: 1.5em;
+/* Респонсив стилове */
+@media (max-width: 1200px) {
+    .main-list {
+        justify-content: space-evenly;
+        gap: 2px;
+    }
+    
+    .main-list > li > a {
+        padding: 10px 12px;
+        font-size: clamp(0.9rem, 1.3vw, 1.1em);
+    }
+    
+    .logo {
+        width: 130px;
+        height: 90px;
+    }
+}
+
+@media (max-width: 1025px) {
+    .main-list {
+        padding: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+        row-gap: 10px;
+    }
+    
+    .main-list > li > a {
+        padding: 8px 10px;
+        font-size: clamp(0.85rem, 1.2vw, 1em);
+    }
+    
+    .logo {
+        width: 120px;
+        height: 80px;
+    }
+    
+    /* Единна големина на шрифта за главни елементи и dropdown */
+    .nested-list li a {
+        font-size: clamp(0.85rem, 1.2vw, 1em); /* Същия размер като главните елементи */
+    }
+    
+    #image-link {
+        width: 120px;
+        height: 80px;
+    }
+}
+
+/* Допълнителни корекции за дълги текстове */
+@media (max-width: 1025px) {
+    .main-list > li:nth-last-child(-n+3) > a {
+        font-size: clamp(0.8rem, 1.1vw, 0.95em);
+        padding: 8px 8px;
+    }
 }
