@@ -189,29 +189,56 @@ emojiButtons.forEach(button => {
     const bgColor = button.getAttribute("data-color");
     const dayId = selectedDayElement.getAttribute("data-date");
 
+    // 🧹 Ако потребителят е избрал "Изчисти"
+    if (emoji === "") {
+      // 1. Премахване от localStorage
+      const notes = safeParse("dayNotes");
+      const emojiData = safeParse("emojiCalendar");
+
+      delete notes[dayId];
+      delete emojiData[dayId];
+
+      localStorage.setItem("dayNotes", JSON.stringify(notes));
+      localStorage.setItem("emojiCalendar", JSON.stringify(emojiData));
+
+      // 2. Почистване на визуалните индикатори
+      selectedDayElement.classList.remove("has-note");
+      selectedDayElement.style.backgroundColor = "";
+
+      const noteIcon = selectedDayElement.querySelector(".note-indicator");
+      if (noteIcon) noteIcon.remove();
+
+      const notePreview = selectedDayElement.querySelector(".note-preview");
+      if (notePreview) notePreview.remove();
+
+      const emojiIndicator = selectedDayElement.querySelector(".emoji-indicator");
+      if (emojiIndicator) emojiIndicator.remove();
+
+      noteTextarea.value = "";
+
+      closeEmojiModal();
+      return; // 🛑 Спиране на останалия код
+    }
+
+    // 🎯 Ако е избрано нормално емоджи:
     selectedDayElement.style.backgroundColor = bgColor || "";
 
     let existingEmoji = selectedDayElement.querySelector(".emoji-indicator");
     if (existingEmoji) existingEmoji.remove();
 
-    if (emoji) {
-      const emojiSpan = document.createElement("span");
-      emojiSpan.className = "emoji-indicator";
-      emojiSpan.innerText = emoji;
-      selectedDayElement.appendChild(emojiSpan);
-    }
+    const emojiSpan = document.createElement("span");
+    emojiSpan.className = "emoji-indicator";
+    emojiSpan.innerText = emoji;
+    selectedDayElement.appendChild(emojiSpan);
 
     const emojiData = safeParse("emojiCalendar");
-    if (emoji) {
-      emojiData[dayId] = { emoji, color: bgColor };
-    } else {
-      delete emojiData[dayId];
-    }
+    emojiData[dayId] = { emoji, color: bgColor };
     localStorage.setItem("emojiCalendar", JSON.stringify(emojiData));
 
     closeEmojiModal();
   });
 });
+
 
 // Затваряне на модалите
 emojiClose.onclick = closeEmojiModal;
@@ -231,3 +258,179 @@ window.addEventListener("DOMContentLoaded", () => {
 document.getElementById("calendar-button").addEventListener("click", () => {
   datePicker.showPicker();
 });
+
+const breatheCircle = document.getElementById("breathe-circle");
+
+const phases = [
+  { text: "Вдишай", duration: 4000, scale: 1.3, color: "#d4edda" },
+  { text: "Задръж", duration: 4000, scale: 1.3, color: "#ffeeba" },
+  { text: "Издишай", duration: 4000, scale: 1.0, color: "#f8d7da" }
+];
+
+let phaseIndex = 0;
+
+function runBreathingCycle() {
+  const currentPhase = phases[phaseIndex];
+  
+  breatheCircle.innerText = currentPhase.text;
+  breatheCircle.style.transform = `scale(${currentPhase.scale})`;
+  breatheCircle.style.backgroundColor = currentPhase.color;
+
+  setTimeout(() => {
+    phaseIndex = (phaseIndex + 1) % phases.length;
+    runBreathingCycle();
+  }, currentPhase.duration);
+}
+
+runBreathingCycle();
+
+
+const questions = [
+  {
+    question: "Как обикновено се справяш със стреса?",
+    options: [
+      { text: "Разходка навън", type: "Природолюбител" },
+      { text: "Медитация и йога", type: "Спокоен ум" },
+      { text: "Говоря с приятели", type: "Социален оптимист" },
+      { text: "Гледам филм или играя игри", type: "Креативен беглец" }
+    ]
+  },
+  {
+    question: "Кой е твоят идеален начин за релакс?",
+    options: [
+      { text: "Слушане на спокойна музика", type: "Спокоен ум" },
+      { text: "Пътуване сред природата", type: "Природолюбител" },
+      { text: "Срещи с приятели", type: "Социален оптимист" },
+      { text: "Четене на книга", type: "Креативен беглец" }
+    ]
+  },
+  {
+    question: "Кое от изброените ти носи най-много спокойствие?",
+    options: [
+      { text: "Тишината", type: "Спокоен ум" },
+      { text: "Звукът на птици и дървета", type: "Природолюбител" },
+      { text: "Смехът на приятели", type: "Социален оптимист" },
+      { text: "Потапяне в измислен свят", type: "Креативен беглец" }
+    ]
+  }
+];
+
+let currentQuestionIndex = 0;
+let selectedAnswers = [];
+
+const startBtn = document.getElementById("start-quiz");
+const quizContainer = document.getElementById("quiz-container");
+const quizStart = document.getElementById("quiz-start");
+const quizQuestion = document.getElementById("quiz-question");
+const quizOptions = document.getElementById("quiz-options");
+const quizError = document.getElementById("quiz-error");
+const prevBtn = document.getElementById("prev-question");
+const nextBtn = document.getElementById("next-question");
+const quizResult = document.getElementById("quiz-result");
+const quizScore = document.getElementById("quiz-score");
+const quizMessage = document.getElementById("quiz-message");
+const restartBtn = document.getElementById("restartQuiz");
+
+startBtn.addEventListener("click", () => {
+  quizStart.style.display = "none";
+  quizContainer.style.display = "block";
+  showQuestion();
+});
+
+function showQuestion() {
+  const current = questions[currentQuestionIndex];
+  quizQuestion.innerHTML = `<h2>${current.question}</h2>`;
+  quizOptions.innerHTML = "";
+  quizError.style.display = "none";
+
+  current.options.forEach((option, index) => {
+    const optionId = `question-${currentQuestionIndex}-option-${index}`;
+
+    const wrapper = document.createElement("div");
+    wrapper.classList.add("quiz-option-wrapper");
+
+    const input = document.createElement("input");
+    input.type = "radio";
+    input.name = `question-${currentQuestionIndex}`;
+    input.id = optionId;
+    input.value = index;
+    input.checked = selectedAnswers[currentQuestionIndex] === index;
+
+    input.addEventListener("change", () => {
+      selectedAnswers[currentQuestionIndex] = index;
+    });
+
+    const label = document.createElement("label");
+    label.setAttribute("for", optionId);
+    label.innerText = option.text;
+
+    wrapper.appendChild(input);
+    wrapper.appendChild(label);
+    quizOptions.appendChild(wrapper);
+  });
+
+  prevBtn.style.display = currentQuestionIndex > 0 ? "inline-block" : "none";
+  nextBtn.innerText = currentQuestionIndex === questions.length - 1 ? "Виж резултата" : "Напред";
+}
+
+
+nextBtn.addEventListener("click", () => {
+  if (selectedAnswers[currentQuestionIndex] == null) {
+    quizError.style.display = "block";
+    return;
+  }
+  quizError.style.display = "none";
+
+  if (currentQuestionIndex < questions.length - 1) {
+    currentQuestionIndex++;
+    showQuestion();
+  } else {
+    showResult();
+  }
+});
+
+prevBtn.addEventListener("click", () => {
+  if (currentQuestionIndex > 0) {
+    currentQuestionIndex--;
+    showQuestion();
+  }
+});
+
+restartBtn.addEventListener("click", () => {
+  currentQuestionIndex = 0;
+  selectedAnswers = [];
+  quizResult.style.display = "none";
+  quizStart.style.display = "block";
+});
+
+function showResult() {
+  const typeCounts = {};
+  selectedAnswers.forEach((answerIndex, qIndex) => {
+    const type = questions[qIndex].options[answerIndex].type;
+    typeCounts[type] = (typeCounts[type] || 0) + 1;
+  });
+
+  const sorted = Object.entries(typeCounts).sort((a, b) => b[1] - a[1]);
+  const resultType = sorted[0][0];
+
+  quizScore.innerHTML = `Ти си: <strong>${resultType}</strong> 🧘‍♀️`;
+  quizMessage.innerText = getResultMessage(resultType);
+
+  quizContainer.style.display = "none";
+  quizResult.style.display = "block";
+}
+
+function getResultMessage(type) {
+  switch (type) {
+    case "Природолюбител":
+      return "Ти се зареждаш от природата и обичаш да намираш баланс в нейната красота 🌿";
+    case "Спокоен ум":
+      return "Твоята сила е вътрешният мир. Ти обичаш тишината и моментите на осъзнатост 🧘";
+    case "Социален оптимист":
+      return "Ти черпиш енергия от хората около теб и вярваш, че усмивката лекува 😊";
+    case "Креативен беглец":
+      return "Твоят начин за релакс е чрез въображението – книги, изкуство, фантазия 🎨";
+    default:
+      return "Уникален си! Продължавай да откриваш себе си!";
+  }
+}

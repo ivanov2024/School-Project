@@ -1,0 +1,137 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fb;
+    margin: 0;
+    padding: 0;
+    color: #2c3e50;
+}
+
+.useful-links-main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.links-intro {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.links-intro h2 {
+    font-size: 2.2em;
+    color: #1a73e8;
+    margin-bottom: 10px;
+}
+
+.links-intro p {
+    font-size: 1.1em;
+    color: #444;
+}
+
+.link-category {
+    margin-bottom: 40px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+}
+
+.link-category:hover {
+    transform: translateY(-5px);
+}
+
+.link-category h3 {
+    font-size: 1.5em;
+    color: #2b7a78;
+    margin-bottom: 20px;
+}
+
+.link-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.link-list li {
+    margin-bottom: 18px;
+}
+
+.link-list a {
+    font-size: 1.1em;
+    color: #1a73e8;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.link-list a:hover {
+    text-decoration: underline;
+}
+
+.link-list span {
+    display: block;
+    font-size: 0.95em;
+    color: #555;
+    margin-top: 4px;
+}
+
+/* До 400px */
+@media (max-width: 400px) {
+    .useful-links-main {
+        padding: 25px 12px;
+    }
+
+    .links-intro h2 {
+        font-size: 1.6em;
+    }
+
+    .links-intro p {
+        font-size: 1em;
+    }
+
+    .link-category {
+        padding: 18px;
+    }
+
+    .link-category h3 {
+        font-size: 1.3em;
+    }
+
+    .link-list a {
+        font-size: 1em;
+    }
+
+    .link-list span {
+        font-size: 0.9em;
+    }
+}
+
+/* От 401px до 600px */
+@media (min-width: 401px) and (max-width: 600px) {
+    .useful-links-main {
+        padding: 30px 16px;
+    }
+
+    .links-intro h2 {
+        font-size: 1.9em;
+    }
+
+    .links-intro p {
+        font-size: 1.05em;
+    }
+
+    .link-category {
+        padding: 22px;
+    }
+
+    .link-category h3 {
+        font-size: 1.4em;
+    }
+
+    .link-list a {
+        font-size: 1.05em;
+    }
+
+    .link-list span {
+        font-size: 0.92em;
+    }
+}
