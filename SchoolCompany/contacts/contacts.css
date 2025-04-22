@@ -1,82 +1,254 @@
-fieldset {
-    border:none;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    margin: 60px 0px 0px 100px;
-    padding: 40px;
-    width: 400px;
+*,
+*::before,
+*::after {
+    box-sizing: border-box; /* Това гарантира, че border и padding се включват в ширината на елементите */
 }
 
-.container {
+/* Общи стилове */
+main {
     display: flex;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+    margin: 40px auto;
+    max-width: 1200px;
+    align-items: flex-start;
+    flex-wrap: wrap; /* Позволява на елементите да се подреждат вертикално при малки екрани */
+}
+
+/* Стилове за формата за контакт */
+.contact-form {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
     flex-direction: column;
+    align-items: flex-start;
+}
+
+fieldset {
+    padding: 40px;
+    margin: 0;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+    box-sizing: border-box;
+    border: 0.5px solid #000;
+    align-self: flex-start;
 }
 
 legend {
     font-size: 2em;
     font-weight: 500;
+    padding: 0 10px;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
 }
 
 label {
-    font-size: 1.3em;
+    font-size: 1.1em;
     font-weight: 500;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    color: #333;
 }
 
 span {
     color: red;
 }
 
-input[type=email], input[type=text], textarea {
+input[type="email"],
+input[type="text"],
+textarea {
     outline: none;
-    font-size: 17px;
-    padding: 10px 20px;
+    font-size: 1em;
+    padding: 12px 15px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
 }
 
-input[type=button] {
-    border: none;
-    border-radius: 5px;
-    width: 100%;
-    padding: 20px;
-    font-size: 1.1em;
-    font-weight: 400;
-    cursor: pointer;
+input[type="email"]:focus,
+input[type="text"]:focus,
+textarea:focus {
+    border-color: #28a745;
 }
 
 textarea {
     resize: none;
-    height: 120px;
-    width: 440px;
+    min-height: 120px;
+}
+
+.submit-container {
+    margin-top: 10px;
+}
+
+input[type="submit"] {
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1em;
+    font-weight: 500;
+    cursor: pointer;
+    background-color: #28a745;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #1f8938;
 }
 
 .description {
-    font-size: 1.2rem;
-    color: #7f7f7f;
+    font-size: 0.9em;
+    color: #666;
     font-style: italic;
-    margin: auto;
+    text-align: center;
+    margin-top: 10px;
 }
 
-main {
-    display: flex;
-    justify-content: space-evenly;
-    gap: 40px;
-    flex-wrap: wrap;
+/* Стилове за картата */
+.map {
+    flex: 1;
+    min-width: 300px;
+    align-self: flex-start;
+    margin-top: 45px;
 }
 
 iframe {
-    margin: 60px 100px 0px 0px;
+    width: 100%;
+    height: 500px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* @media (max-width: 768px) {
+/* Респонсивни стилове за широчини <=400px */
+@media (max-width: 400px) {
     main {
         flex-direction: column;
         align-items: center;
+        gap: 10px; /* Намалена разлика между елементите */
     }
 
-    fieldset, iframe {
-        margin: 20px;
-        width: 90%;
+    /* Контейнер за формата */
+    .contact-form {
+        width: 100%; /* Ще заеме цялата ширина */
+        padding: 10px;
     }
-} */
+
+    /* Полета в форма */
+    input[type="email"],
+    input[type="text"],
+    textarea {
+        font-size: 0.9em; /* Намален шрифт */
+        padding: 8px 10px; /* Намален padding */
+    }
+
+    input[type="submit"] {
+        padding: 12px;
+        font-size: 1em;
+    }
+
+    /* Картата (iframe) */
+    .map {
+        width: 100%;
+        height: 180px; /* Още по-ниска височина за мобилни устройства */
+    }
+
+    iframe {
+        height: 180px; /* Настройване на височина на iframe */
+    }
+
+    .description {
+        font-size: 0.75em; /* Намален размер на шрифта */
+    }
+}
+
+/* Респонсивни стилове за широчини >400px и <=600px */
+@media (min-width: 401px) and (max-width: 600px) {
+    main {
+        flex-direction: column; /* Преобразува оформлението на вертикално */
+        gap: 20px;
+    }
+
+    .contact-form {
+        width: 100%; /* Ще заеме цялата ширина на екрана */
+        padding: 20px;
+    }
+
+    input[type="email"],
+    input[type="text"],
+    textarea {
+        font-size: 15px; /* Може да бъде малко по-голямо на този размер */
+    }
+
+    input[type="submit"] {
+        padding: 13px;
+        font-size: 1.05em;
+    }
+
+    /* Картата (iframe) */
+    .map {
+        width: 100%;
+        height: 350px; /* По-висока височина за по-добро представяне */
+    }
+
+    iframe {
+        height: 350px; /* Настройване на височина на iframe */
+    }
+
+    .description {
+        font-size: 0.9em;
+    }
+}
+
+/* Респонсивни стилове за широчини >600px */
+@media (min-width: 601px) {
+    main {
+        flex-direction: row; /* Оформлението е в редица */
+        gap: 40px;
+        justify-content: space-between;
+    }
+
+    .contact-form {
+        width: 50%; /* Формата заема 50% от ширината */
+        padding: 30px;
+    }
+
+    input[type="email"],
+    input[type="text"],
+    textarea {
+        font-size: 16px; /* По-голям шрифт за по-големи екрани */
+    }
+
+    input[type="submit"] {
+        padding: 15px;
+        font-size: 1.1em;
+    }
+
+    /* Картата (iframe) */
+    .map {
+        width: 50%; /* Картата заема останалата 50% от ширината */
+        height: 500px;
+    }
+
+    iframe {
+        height: 500px; /* Оставяме височината както е */
+    }
+
+    .description {
+        font-size: 1em;
+    }
+}
