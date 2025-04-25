@@ -1,4 +1,13 @@
 <header>
+
+    <div class="burger-menu">
+        <div class="burger-icon" id="burger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
     <nav class="main-nav">        
         <ul class="main-list">
             <li>
@@ -76,4 +85,34 @@
             </li>
         </ul>
     </nav>
+
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-content">
+            <ul class="mobile-main-list">
+                <!-- Ще копираме навигацията тук чрез JavaScript -->
+            </ul>
+        </div>
+    </div>
+
 </header>
+
+<!-- <script src="navJS.js"></script> -->
+
+<script>
+    console.log("Inline script loaded"); // Проверка дали скрипт се изпълнява
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log("DOM fully loaded - inline");
+        
+        const burgerIcon = document.getElementById('burger-icon');
+        if (!burgerIcon) {
+            console.error("Burger icon not found!");
+            return;
+        }
+        
+        burgerIcon.addEventListener('click', function() {
+            console.log("Burger clicked - inline");
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('open');
+        });
+    });
+    </script>
